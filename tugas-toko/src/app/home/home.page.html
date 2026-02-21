@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Manajemen Produk di toko saya</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- MODE EDIT INFO -->
+  <h3 *ngIf="editMode" style="color: orange;">
+    ✏ Mode Edit Produk
+  </h3>
+
+  <!-- FORM INPUT -->
+  <ion-item>
+    <ion-input
+      label="Nama Produk"
+      labelPlacement="floating"
+      [(ngModel)]="namaBaru">
+    </ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-input
+      type="number"
+      label="Harga"
+      labelPlacement="floating"
+      [(ngModel)]="hargaBaru">
+    </ion-input>
+  </ion-item>
+
+  <!-- TOMBOL SIMPAN / UPDATE -->
+  <ion-button
+    expand="block"
+    color="success"
+    (click)="tambahProduk()">
+
+    {{ editMode ? 'Update Produk' : 'Simpan Produk' }}
+
+  </ion-button>
+
+  <!-- TOMBOL BATAL EDIT -->
+  <ion-button
+    *ngIf="editMode"
+    expand="block"
+    color="medium"
+    (click)="resetForm()">
+
+    Batal Edit
+
+  </ion-button>
+
+  <br><br>
+
+  <!-- LIST PRODUK -->
+  <ion-list>
+
+    <ion-item *ngFor="let item of produkList">
+
+      <ion-label>
+        <h2>{{ item.nama }}</h2>
+        <p>Rp {{ item.harga }}</p>
+      </ion-label>
+
+      <!-- TOMBOL EDIT -->
+      <ion-button
+        size="small"
+        color="warning"
+        (click)="editProduk(item)">
+
+        Edit
+
+      </ion-button>
+
+      <!-- TOMBOL HAPUS -->
+      <ion-button
+        size="small"
+        color="danger"
+        (click)="hapusProduk(item.id)">
+
+        Hapus
+
+      </ion-button>
+
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>
